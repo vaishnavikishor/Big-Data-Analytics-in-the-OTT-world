@@ -1,0 +1,77 @@
+#reading the file
+data1 <- read.csv("C:/Users/Devesh Kishor/Downloads/amazon prime movies.csv")
+# Printing the first 10 Rows
+head(data1,n=10)
+
+# Printing the last 10 Rows
+tail(data1,n=10)
+
+# Printing the Summary and quick brief about the Dataset -- AMAZON PRIME VIDEO
+str(data1)
+summary(data1)
+
+#Now we will see the Different Comparisons among the dataset
+#install.packages("ggplot2") to install ggplot
+library(ggplot2)
+
+#Comparison -1 (Movie Name vs Maturity Rating)
+plot1 <- ggplot(data=head(data1,n=10),aes(x=Movie.Name,y=Maturity.Rating))
+plot1 + geom_point()
+
+
+#Adding Color Mapping to the plot
+plot1 <-ggplot(data=data1,aes(x=Movie.Name,y=Maturity.Rating,color=Language,size=0.5))+xlab("Movie Ratings")+ylab("Movie Name")
+plot1 + geom_point()
+plot1 <-ggplot(data=head(data1,n=30),aes(x=Movie.Name,y=Maturity.Rating,color=Language))+xlab("Movie Name")+ylab("Movie Ratings")
+plot1 + geom_point(size=5)
+plot1 <- ggplot(data=tail(data1,n=30),aes(x=Movie.Name,y=Maturity.Rating,color=Language,size=0.5))+xlab("Movie Name")+ylab("Movie Ratings")
+plot1 + geom_point()
+
+
+#Adding Some Styling for the Plot
+plot1 +geom_point()+ theme(
+  axis.title.x =  element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=1),
+  axis.text.y = element_text(size=20),
+  
+)
+
+#Comparison-2 (Title vs IMDB Ratings)
+plot2 <- ggplot(data=head(data1,n=30),aes(x=Movie.Name,y=IMDb.Rating,color=Language))+xlab("Movie Name")+ylab("IMDb Rating")
+plot2 + geom_point(size=5)
+
+
+#Adding Some Styling
+plot2 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=1),
+  axis.text.y = element_text(size=20),
+ 
+) + geom_smooth(fill=NA)
+
+#Adding More Geometry to the Dataset
+
+plot2 <- ggplot(data=head(data1,n=30),aes(x=IMDb.Rating,color=Language,fill=Language))
+plot2 + geom_histogram(stat = "count",binwidth = 10,position = "stack",color="Black")
+plot2 + geom_histogram(stat = "count",binwidth = 10,position = "stack",color="Black")+facet_grid(Maturity.Rating ~.)
+
+
+#Comparison 3 (MovieName vs YearOfRelease)
+plot3 <- ggplot(data = head(data1,n=30),aes(x=Movie.Name,y=Year.of.Release,color=Language))+xlab("Movie Name")+ylab("Year of Release")
+plot3 + geom_point(size=5)
+
+#Add some Styling
+plot3 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=1),
+  axis.text.y = element_text(size=20),
+  
+) + geom_smooth(fill=NA)
+
+
+#Adding more Geometry to the Plot
+plot3 <- ggplot(data = head(data1,n=30),aes(x=Year.of.Release,color=Language))+xlab("Year of Release")
+plot3 + geom_histogram(stat="count",color="Black",aes(fill=Language))
