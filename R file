@@ -79,3 +79,123 @@ plot3 + geom_histogram(stat="count",color="Black",aes(fill=Language))
 #2. Disney_plus_hotstar
 data2 <- read.csv("C:/Users/Devesh Kishor/Downloads/disney_plus_shows.csv")
 
+# Printing the first 10 Rows
+head(data2,n=10)
+
+# Printing the last 10 Rows
+tail(data2,n=10)
+
+# Printing the Summary and quick brief about the Dataset -- AMAZON PRIME VIDEO
+str(data2)
+summary(data2)
+
+# Now we will see the different Combinations among the dataset
+library(ggplot2)
+
+# Comparison - 1 (Title vs IMDB Ratings)
+plot1 <- ggplot(data=head(data2,n=30),aes(x=title,y=imdb_rating,color=type))+xlab("Title")+ylab("IMDB Rating")
+plot1 + geom_point(size=5)
+
+
+# Adding some Styling
+plot1 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=1),
+  axis.text.y = element_text(size=20),
+  
+) + geom_smooth(fill=NA)
+
+# Adding Some Geometry
+plot1 <- ggplot(data=head(data2,n=30),aes(x=imdb_rating,color=type))+xlab("IMDB Rating")
+plot1 + geom_bar()
+ 
+plot1 + geom_histogram(stat="count",aes(fill=type),color="Black")
+
+#Comparison -2 (Title vs IMDB Rating)
+
+plot2 <- ggplot(data=head(data2,n=30),aes(x=imdb_rating,color=genre))+xlab("IMDB Rating")
+plot2 + geom_histogram(stat="count",aes(fill=genre))
+
+# Comparison - 3 (Title vs Awards)
+plot3 <- ggplot(data=head(data2,n=30),aes(x=awards,y=title,color=type))+xlab("Awards")+ylab("Title")
+plot3 + geom_point(size=5)
+
+# Adding some Styling
+plot3 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10),
+  
+) 
+
+# Adding Some Geometry
+plot3 <- ggplot(data=head(data2,n=30),aes(x=awards,color=awards))+xlab("Awards")
+plot3 + geom_bar()+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10),
+  
+) 
+
+
+plot3 + geom_histogram(stat="count",aes(fill=type,color=awards),color="Black")+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10),
+  
+) 
+
+
+# Adding Facets
+plot3 <- ggplot(data=head(data2,n=10),aes(x=awards,color=awards))+xlab("Awards")
+plot3 + geom_histogram(stat="count",aes(fill=type,color=awards),color="Black")+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10)
+) + facet_grid(imdb_rating~.)
+
+# Comparison- 4 (Title vs IMDB Votes)
+plot4 <- ggplot(data=head(data2,n=30),aes(x=imdb_votes,color=type))+xlab("IMDB Votes")
+plot4 + geom_bar()
+
+#Adding Some Geometry
+
+plot4 + geom_histogram(stat="count",aes(fill=type),color="Black")+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10)
+)
+plot4 <- ggplot(data = head(data2,n=30),aes(x=title,y=imdb_votes,color=type))+xlab("Title")+ylab("IMDB Votes")
+plot4  + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10),
+) 
+
+#Comparison -5 (Rated Comparison)
+plot5 <- ggplot(data=head(data2,n=30),aes(x=rated,color=type))
+plot5 + geom_bar()
+
+# Adding some Geometry
+plot5  + geom_bar()+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=10),
+  axis.text.y = element_text(size=10),
+) 
+plot5  + geom_histogram(stat="count",color="Black",aes(fill=type))+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=10),
+  axis.text.y = element_text(size=10),
+) +xlab("Movie Rated")
+
+
+
