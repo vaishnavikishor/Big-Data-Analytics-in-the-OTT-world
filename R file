@@ -75,3 +75,7 @@ plot3 + geom_point(size=5)+theme(
 #Adding more Geometry to the Plot
 plot3 <- ggplot(data = head(data1,n=30),aes(x=Year.of.Release,color=Language))+xlab("Year of Release")
 plot3 + geom_histogram(stat="count",color="Black",aes(fill=Language))
+
+#2. Disney_plus_hotstar
+data2 <- read.csv("C:/Users/Devesh Kishor/Downloads/disney_plus_shows.csv")
+
