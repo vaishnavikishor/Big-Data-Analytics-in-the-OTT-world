@@ -197,5 +197,55 @@ plot5  + geom_histogram(stat="count",color="Black",aes(fill=type))+theme(
   axis.text.y = element_text(size=10),
 ) +xlab("Movie Rated")
 
+data3 <- read.csv("D://User 2//Datascience Projects//netflix_titles.csv")
+
+# Printing the first 10 Rows
+head(data3,n=10)
+
+# Printing the last 10 Rows
+tail(data3,n=10)
+
+# Printing the Summary and quick brief about the Dataset -- AMAZON PRIME VIDEO
+str(data3)
+summary(data3)
+
+# Now we will see the different Combinations among the dataset
+library(ggplot2)
+
+#Comparison -1 (Title vs Rating)
+plot1 <- ggplot(data=head(data3,n=30),aes(x=title,y=rating))
+plot1 + geom_point()
+
+#Adding some Styling and Geometry
+plot1 <- ggplot(data=head(data3,n=30),aes(x=rating))+xlab("Rating")
+plot1 + geom_histogram(stat="count",aes(fill=type))+
+  theme(axis.title.x = element_text(size=20),
+        axis.title.y = element_text(size=20),
+        axis.text.x = element_text(size=15),
+        axis.text.y = element_text(size=25))
+
+#Comparison -2 (Rating vs Type)
+plot2 <- ggplot(data=head(data3,n=30),aes(x=rating,y=type,color=type))
+plot2 + geom_point(size=5)
+
+plot2 <- ggplot(data=head(data3,n=30),aes(x=type))
+plot2 + geom_histogram(stat="count",aes(fill=rating))
+
+# Comparison -3 (Title vs DateAdded)
+
+plot3 <- ggplot(data=head(data3,n=30),aes(x=title,y=date_added,color=type))+xlab("Title")+ylab("Date Added")
+plot3 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=2),
+  axis.text.y = element_text(size=2)
+)
+
+# Adding some Geometry
+plot3 <- ggplot(data=head(data3,n=30),aes(x=date_added))+xlab("Date Added")
+plot3 + geom_histogram(stat="count",color="Black",aes(fill=type))
+
+
+
 
 
